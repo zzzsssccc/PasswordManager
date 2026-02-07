@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密码生成器 - 安全强大的密码生成工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-halved"></i>
+                <span>安全密码生成器</span>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-btn" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="main-content">
+            <div class="generator-card">
+                <h1>生成安全密码</h1>
+                <p class="subtitle">创建强密码，保护您的账户安全</p>
+
+                <!-- 密码显示区域 -->
+                <div class="password-display">
+                    <input type="text" id="passwordOutput" readonly placeholder="点击生成密码" aria-label="生成的密码">
+                    <div class="password-actions">
+                        <button id="copyBtn" class="action-btn" title="复制密码">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button id="regenerateBtn" class="action-btn" title="重新生成">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 密码强度指示器 -->
+                <div class="strength-indicator">
+                    <div class="strength-label">
+                        <span>密码强度</span>
+                        <span id="strengthText">-</span>
+                    </div>
+                    <div class="strength-bar">
+                        <div id="strengthBar" class="strength-fill"></div>
+                    </div>
+                </div>
+
+                <!-- 配置选项 -->
+                <div class="settings">
+                    <div class="setting-group">
+                        <label for="lengthSlider">
+                            <span class="setting-label">密码长度</span>
+                            <span id="lengthValue" class="setting-value">16</span>
+                        </label>
+                        <input type="range" id="lengthSlider" min="4" max="64" value="16">
+                        <div class="range-labels">
+                            <span>4</span>
+                            <span>64</span>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <span>包含大写字母 (A-Z)</span>
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="uppercase" checked>
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <span>包含小写字母 (a-z)</span>
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="lowercase" checked>
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <span>包含数字 (0-9)</span>
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="numbers" checked>
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <span>包含特殊字符 (!@#$%)</span>
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="symbols" checked>
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <span>排除相似字符 (l, 1, I, O, 0)</span>
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="ambiguous" checked>
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 生成按钮 -->
+                <button id="generateBtn" class="generate-btn">
+                    <i class="fas fa-key"></i>
+                    生成密码
+                </button>
+
+                <!-- 密码历史 -->
+                <div class="password-history">
+                    <div class="history-header">
+                        <h3><i class="fas fa-history"></i> 密码历史</h3>
+                        <button id="clearHistoryBtn" class="clear-history-btn" title="清除历史">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div id="historyList" class="history-list">
+                        <p class="empty-history">暂无历史记录</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特性展示 -->
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>高安全性</h3>
+                    <p>使用加密算法生成难以破解的强密码</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders"></i>
+                    </div>
+                    <h3>自定义选项</h3>
+                    <p>根据需求调整密码长度和字符类型</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock-rotate-left"></i>
+                    </div>
+                    <h3>历史记录</h3>
+                    <p>保存最近生成的密码，方便查找</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-screen"></i>
+                    </div>
+                    <h3>响应式设计</h3>
+                    <p>完美适配桌面和移动设备</p>
+                </div>
+            </div>
+
+            <!-- 安全提示 -->
+            <div class="tips-section">
+                <h2><i class="fas fa-lightbulb"></i> 密码安全建议</h2>
+                <ul class="tips-list">
+                    <li><i class="fas fa-check"></i> 使用至少12位以上的密码长度</li>
+                    <li><i class="fas fa-check"></i> 避免使用个人信息作为密码</li>
+                    <li><i class="fas fa-check"></i> 为不同账户使用不同密码</li>
+                    <li><i class="fas fa-check"></i> 定期更换重要账户的密码</li>
+                    <li><i class="fas fa-check"></i> 建议使用密码管理器管理密码</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2025 密码生成器 | 保护您的数字安全</p>
+            <p class="disclaimer">注意：此工具在本地生成密码，不会发送到任何服务器</p>
+        </footer>
+
+        <!-- Toast 通知 -->
+        <div id="toast" class="toast">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">密码已复制到剪贴板</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
